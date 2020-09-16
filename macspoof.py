@@ -97,22 +97,23 @@ elif a==2:
     new_m=rand_mac()
     #print("Permanent MAC adress is-"+permanent) 
  
+    try:
+    	print("Current MAC address is-")
+    	print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}"))
 
-    print("Current MAC address is-")
-    print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}"))
+    	subprocess.call(["sudo","ifconfig","wlan0","down"])
 
-    subprocess.call(["sudo","ifconfig","wlan0","down"])
-
-    print(new_m)    
+    #print(new_m)    
 
 
 
-    subprocess.call(["sudo","ifconfig","wlan0","hw","ether","%s"%new_m])
-    subprocess.call(["sudo","ifconfig","wlan0","up"])
+    	subprocess.call(["sudo","ifconfig","wlan0","hw","ether","%s"%new_m])
+    	subprocess.call(["sudo","ifconfig","wlan0","up"])
 
-    print("New MAC adddress is-")
-    print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}")) 
-   
+    	print("New MAC adddress is-")
+    	print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}")) 
+   except:
+	print("Sorry for error not valid MAC created try again!!! and can use manual method")
 elif a==3:
     new_m=permanent   
      
