@@ -44,7 +44,8 @@ print("1-To change MAC address manually ")
 print("2-To get the random MAC address ")
 print("3-To chnge to permanent MAC adress- ")
 print("4-To show the current MAC address ")
-a=int(input(">"))
+print("5-To Exit the program")
+a=int(input("\nEnter The oprtion->"))
 
 
 perm = open("mainmac.txt", "r")
@@ -97,23 +98,22 @@ elif a==2:
     new_m=rand_mac()
     #print("Permanent MAC adress is-"+permanent) 
  
-    try:
-    	print("Current MAC address is-")
-    	print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}"))
+    
+    print("Current MAC address is-")
+    print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}"))
 
-    	subprocess.call(["sudo","ifconfig","wlan0","down"])
+    subprocess.call(["sudo","ifconfig","wlan0","down"])
 
     #print(new_m)    
 
 
 
-    	subprocess.call(["sudo","ifconfig","wlan0","hw","ether","%s"%new_m])
-    	subprocess.call(["sudo","ifconfig","wlan0","up"])
+    subprocess.call(["sudo","ifconfig","wlan0","hw","ether","%s"%new_m])
+    subprocess.call(["sudo","ifconfig","wlan0","up"])
 
-    	print("New MAC adddress is-")
-    	print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}")) 
-   except:
-	print("Sorry for error not valid MAC created try again!!! and can use manual method")
+    print("New MAC adddress is-")
+    print(os.system("ifconfig wlan0 | grep ether | grep -oE [0-9abcdef:]{17}")) 
+   
 elif a==3:
     new_m=permanent   
      
@@ -138,6 +138,11 @@ elif a==4:
     print("Present Mac address is ")
     sh=show()
     print(sh)
+
+elif a==5:
+    print("--------Program Ended---------")
+    exit()
+
 
 else:
     print("Entered a invalid input")    
